@@ -1,0 +1,172 @@
+#include <iostream>
+#include <stack>
+#include <string>
+
+
+
+using namespace std;
+
+//this is basically to check either 2 chars are open & close
+
+         bool brakts(char OPB, char CLB)
+                  {
+	if( OPB == '(' && CLB == ')' ) 
+	{
+			return true;
+	}
+
+	
+	else if ( OPB == '[' && CLB == ']' ) 
+	{
+			return true;
+	}
+	else if ( OPB == '{' && CLB == '}' ) 
+		{
+			return true;
+	   }
+	
+	return false;
+	
+                }
+
+// checking for balancing equ by ftn ParaChker
+
+      bool ParaChker(string input_str)
+       {
+       	//stack is like a memory  as data enter assigning it indexes
+	stack<char> storing;
+	
+	for(int  checker= 0;  checker< input_str.length(); checker++)
+	
+	{
+		if( input_str[checker] == '(' || input_str[checker] == '{' || input_str[checker] == '[' )
+		//if this brackets are in expression enter into stack
+		//push() entering elements in array
+			storing.push(input_str[checker]);
+		
+			else if (input_str[checker] == ')' || input_str[checker] == '}' || input_str[checker] == ']')
+	
+		{
+			
+			if( storing.empty() || !brakts( storing.top(), input_str[checker] ) )
+				return false;
+				
+			else
+			//pop() to remove the element from array
+				storing.pop();
+		}
+	}
+	
+	return storing.empty();
+	
+       }
+
+
+     int main()
+     
+       {
+     start:  
+	 	char again;
+	// variable "a" is to check how many input you want
+	int a;
+	// here you are entering the strings you wanna  test	
+	string Z;
+	//intialization of the loop
+	//the loop is basically to check our input range
+	int i=1;
+
+  	cout<<"  How many inputs you want?"<<endl;
+	cin>>a; 
+	
+	cout << endl;
+
+	   if(a>=1)
+	    {
+	   	if(a<=1000)
+	   
+  { 
+	    //cout<<a;
+	    //cout<<"\n";
+		 while (i<=a)
+		{
+		  cout << "Enter an expression: "; 
+		   cin >> Z; 
+		   // for checking the lenght of string
+		   int l= Z.length();
+		   //cout<<l;
+		   if(l>=1)
+		   {
+			
+		   if(l<=1000)
+		   {
+		   
+		   cout<<"\n";
+		   
+		   // here the function is calling, it will move up check the entered eqquation and after matching enter to show the OutPut
+		   if(ParaChker(Z))
+	
+	
+		cout << " YES!" << endl;
+	
+	else
+	{
+	
+	    cout<<endl;
+		cout << "No!" << endl; 
+	}
+		
+    }
+    
+       else
+       
+          {
+	cout<<"enter valid string length";
+           }
+		  
+	 
+	   
+		 i++;
+	}
+	}
+	
+	       }   
+	   }
+		   	
+	 else  
+	 
+	 {
+	      cout<<endl;
+	 
+	 	cout<<"  entering expression should be >=1 or <=1000 "<<endl;
+	 
+	 
+	 }
+	  
+	  cout<<endl;
+   cout << "Do you wanna continue?"<<endl;
+   cin >> again;
+   
+      if (again == 'y' )
+      
+	  {
+         goto start;
+       }
+       
+       else if(again == 'n' )
+       
+       {
+       	cout<<"Exit!";
+	   }
+	   else
+	   {
+	   	return false;
+	   }
+	   
+
+}
+
+
+
+	
+	
+	
